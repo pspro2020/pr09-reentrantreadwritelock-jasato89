@@ -15,6 +15,8 @@ public class Main {
         Thread lector3 = new Thread(new Lector(almacen, 3));
         Thread proveedor = new Thread(new Proveedor(almacen));
 
+
+
         lector1.start();
         lector2.start();
         lector3.start();

@@ -8,7 +8,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class Almacen{
+public class Almacen {
 
     private ArrayList<Integer> products = new ArrayList<>();
     private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
@@ -32,23 +32,26 @@ public class Almacen{
     }
 
     public void checkStock (int productID) {
-            readLock.lock();
-            try {
-               int totalStockOf = 0;
-                for (int product : products) {
-                    if (product == productID) {
-                        totalStockOf++;
-                    }
-                    System.out.printf("%s - Producto %d - Stock: %d\n", LocalTime.now().format(dateFormat), productID, totalStockOf);
-                }
+        readLock.lock();
+        try {
 
-            } finally {
-                readLock.unlock();
-            }
+            System.out.printf("%s - Producto %d - Stock: %d\n", LocalTime.now().format(dateFormat), productID, totalStock(productID));
+
+
+        } finally {
+            readLock.unlock();
+        }
 
     }
 
+    private int totalStock(int productID) {
+        int totalStockOf = 0;
+        for (int product : products) {
+            if (product == productID) {
+                totalStockOf++;
+            }
+        }
+            return totalStockOf;
 
-
-
+        }
 }
